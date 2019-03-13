@@ -1,9 +1,10 @@
 import { createReducer, makeActionCreator, makeSetValueReducer } from "../utils/reducers";
 import { getRepos } from "./store";
 
-const GET_GITHUB_REPOS = 'GET_GITHUB_REPOS'
+// const GET_GITHUB_REPOS = 'GET_GITHUB_REPOS'
+const SET_GITHUB_REPOS = 'SET_GITHUB_REPOS'
 
-const setGithubRepos = makeActionCreator(GET_GITHUB_REPOS)
+const setGithubRepos = makeActionCreator(SET_GITHUB_REPOS)
 
 export const loadCurrentSearchQuery = (query) => (
 	dispatch,
@@ -17,6 +18,6 @@ export const loadCurrentSearchQuery = (query) => (
 		})
 }
 
-export default createReducer({}, () => ({
-	[GET_GITHUB_REPOS]: makeSetValueReducer()
+export default createReducer('', () => ({
+	[SET_GITHUB_REPOS]: makeSetValueReducer()
 }))
