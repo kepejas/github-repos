@@ -1,23 +1,16 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import RepoItem from './../containers/RepoItemContainer'
 
 export default class List extends Component {
 	render() {
-		const {
-			isFetching,
-			items, loadingLabel
-		} = this.props
-
-		const isEmpty = items.length === 0
-		if (isEmpty && isFetching) {
-			return <h2><i>{loadingLabel}</i></h2>
-		}
+		const { uids } = this.props
 
 		return (
 			<div>
 				{
-					items.map((item, index) => (
-						<div key={index}>{item.title}</div>
+					uids.map((uid) => (
+						<RepoItem key={uid} uid={uid} />
 					))
 				}
 			</div>
@@ -26,13 +19,7 @@ export default class List extends Component {
 }
 
 List.propTypes = {
-	loadingLabel: PropTypes.string,
-	items: PropTypes.array.isRequired,
-	isFetching: PropTypes.bool
+	uids: PropTypes.array.isRequired,
 }
 
 
-List.defaultProps = {
-	isFetching: false,
-	loadingLabel: 'Loading...'
-}

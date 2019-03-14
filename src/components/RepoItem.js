@@ -1,5 +1,6 @@
-import React from 'react'
-import Octicon, {RepoForked, PrimitiveDot, Star, IssueOpened} from '@githubprimer/octicons-react'
+import React, { PureComponent } from 'react'
+import { func } from 'prop-types'
+import Octicon, {RepoForked, Star, IssueOpened, Person} from '@githubprimer/octicons-react'
 
 const cardStyle = {
 	display: 'flex',
@@ -27,21 +28,39 @@ const row = {
 	flexDirection: 'row'
 };
 
-const RepoItem = ({children, title, description, onClick }) => (
-	<div style={cardStyle}>
-		<div style={row}>
-			<div style={marginRight}>{title}</div>
-			<div style={{...descriptionStyle, ...marginRight}}>very long description very very very very</div>
-			<button onClick={onClick}><Octicon icon={Star}/></button>
 
-		</div>
-		<div style={row}>
-			<span style={marginRight}><Octicon icon={PrimitiveDot}/></span>
-			<span style={marginRight}><Octicon icon={RepoForked}/> 1</span>
-			<span style={marginRight}><Octicon icon={RepoForked}/> 1</span>
-			<span style={marginRight}><Octicon icon={IssueOpened}/> 1</span>
-		</div>
-	</div>
-);
+export default class RepoItem extends PureComponent {
 
-export default RepoItem
+	componentDidMount() {
+		const { onAttach, fullName } = this.props
+		onAttach(fullName)
+	}
+
+	render() {
+		const {name, description, license, url, language, stars, forks, issues, starred, contributors } = this.props
+
+		return (
+			<div style={cardStyle}>
+				<div style={row}>
+					<div style={marginRight}>{name}</div>
+					<div style={{...descriptionStyle, ...marginRight}}>{description}</div>
+					<Octicon icon={Star} /> {!starred && <span>!Starred</span>}
+
+				</div>
+				<div style={row}>
+					<span style={marginRight}>{license}</span>
+					<span style={marginRight}>{language}</span>
+					<span style={marginRight}><Octicon icon={Star}/>{stars}</span>
+					<span style={marginRight}><Octicon icon={RepoForked}/>{forks}</span>
+					<span style={marginRight}><Octicon icon={Person}/>{contributors || '-'}</span>
+					<span style={marginRight}><Octicon icon={IssueOpened}/>{issues}</span>
+					<span style={marginRight}><a href={url} rel="noreferrer">link</a></span>
+				</div>
+			</div>
+		)
+	}
+}
+
+RepoItem.propTypes = {
+	onAttach: func
+}

@@ -1,9 +1,11 @@
 import { connect } from 'react-redux'
 
 import SearchBar from '../components/SearchBar'
+import { searchThunk } from "../thunks/search";
+
 
 const mapDispatchToProps = (dispatch) => ({
-	onChange: (query) => console.log(query),
+	onChange: (query) => dispatch(searchThunk(query)),
 })
 
 export default connect(

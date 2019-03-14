@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import '../App.css';
 import SearchContainer from '../../containers/SearchContainer'
-import RepoItem from "../../components/RepoItem";
-import List from "../../components/List";
+import List from "../../containers/ListContainer";
 
 class App extends Component {
 	render() {
@@ -11,8 +10,7 @@ class App extends Component {
 				<header className="App-header">
 					<SearchContainer />
 				</header>
-				<RepoItem title={'this is a title'} >labas as krabas</RepoItem>
-				<List loadingLabel={'loading'} items={[{title: 'labas'}, {title: 'as krabas'}]} />
+				<List loadingLabel={'loading'} />
 			</div>
 		);
 	}

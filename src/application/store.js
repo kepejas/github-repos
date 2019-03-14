@@ -1,11 +1,14 @@
 import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import createDebounce from 'redux-debounced'
-import repos from './../repos/'
+import repoReducer from './../store/repos'
+import repos from "../store/repos";
+
 
 export default initialState => createStore(
 	combineReducers({
-		repos
+		repos,
+		repoReducer
 	}),
 	initialState,
 	compose(
@@ -15,3 +18,4 @@ export default initialState => createStore(
 			: (f) => f
 	)
 )
+
