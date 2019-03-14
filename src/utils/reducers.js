@@ -1,39 +1,59 @@
-export const makeActionCreator = (type, ...argNames) => {
-	return function(...args) {
-		const action = { type }
-		argNames.forEach((arg, index) => {
-			action[argNames[index]] = args[index]
-		})
-		return action
-	}
-}
+export const makeActionCreator = (type) => (
+	value
+) => ({
+	type,
+	value
+})
 
-export const createReducer = (initialState, handlers) => {
-	return function reducer(state = initialState, action) {
-		if (handlers.hasOwnProperty(action.type)) {
-			return handlers[action.type](state, action)
-		} else {
-			return state
-		}
+export const createReducer = (
+	defaultState,
+	reducerFactory
+) => (
+	state = defaultState,
+	action
+) => {
+
+	const reducer = reducerFactory(state)[action.type]
+	if (!reducer) {
+		return state
 	}
+
+	return reducer(action, state)
 }
 
 export const makeSetValueReducer = () => (action) => action.value
 
+export const makeSetPropertyValueByUidReducer = (property) => (
+	{uid, value}, state
+) => {
+	const item = state[uid]
 
-export const debounceAction = (
-	action,
-	time,
-	key
-) => (
+	if (!item) {
+		return state
+	}
 
-	Object.assign(action, {
-			meta: {
-				debounce: {
-					time,
-					key
-				}
-			}
+	return {
+		...state,
+		[uid]: {
+			...item,
+			[property]: value
 		}
-	)
+	}
+}
+
+export const makeAddUidsReducer = () => (
+	{ uids }, state
+) => (
+	state.concat(uids)
 )
+
+
+export const makeAddByUidReducer = () => ({ uids, items }, state) => {
+
+	let newState = { ...state }
+
+	uids.forEach((uid, i) => {
+	newState[uid] = items[i]
+})
+	return newState
+}
