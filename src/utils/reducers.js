@@ -5,6 +5,8 @@ export const makeActionCreator = (type) => (
 	value
 })
 
+
+
 export const createReducer = (
 	defaultState,
 	reducerFactory
@@ -21,7 +23,10 @@ export const createReducer = (
 	return reducer(action, state)
 }
 
+
 export const makeSetValueReducer = () => (action) => action.value
+export const makeResetValueReducer = (value) => (args) => value
+
 
 export const makeSetPropertyValueByUidReducer = (property) => (
 	{uid, value}, state

@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import RepoItem from '../components/RepoItem'
-import { getContributorsCount } from "../thunks/repos";
+import { loadUserInfo } from "../thunks/repos";
 
 const mapStateToProps = ({ repoReducer: {  byUid } }, { uid }) => {
 	const item = byUid[uid]
@@ -17,7 +17,7 @@ const mapStateToProps = ({ repoReducer: {  byUid } }, { uid }) => {
 
 const mapDispatchToProps = (dispatch, { uid }) => {
 	return {
-		onAttach: (path) => { dispatch(getContributorsCount(path, uid)) }
+		onAttach: (path) => { dispatch(loadUserInfo(path, uid)) }
 	}
 }
 

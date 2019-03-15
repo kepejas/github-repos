@@ -11,7 +11,7 @@ export default class SearchBar extends Component {
 	setSearchTerm = debounce(searchTerm => {
 		this.setState({ searchTerm })
 		this.props.onChange(searchTerm)
-	}, 300)
+	}, 500)
 
 	render() {
 		return (

@@ -1,14 +1,18 @@
-import { createReducer, makeActionCreator, makeSetValueReducer } from "../utils/reducers";
+import { createReducer, makeResetValueReducer, makeSetValueReducer } from "../utils/reducers";
 import { getRepos } from "../repos/repos";
-import { addMultipleRepos } from "./repos";
+import { addMultipleRepos, resetReposBeforeNewQuery } from "./repos";
+import { makeSetValueActionCreator } from "../utils/actionCreators";
 
-const SET_GITHUB_REPOS = 'SET_GITHUB_REPOS'
+const SET_SEARCH_IN_PROGRESS = 'SET_SEARCH_IN_PROGRESS'
 
-const setGithubRepos = makeActionCreator(SET_GITHUB_REPOS)
+const setLoading = makeSetValueActionCreator(SET_SEARCH_IN_PROGRESS)
 
 export const loadCurrentSearchQuery = (query) => (
 	dispatch
 ) => {
+
+	dispatch(resetReposBeforeNewQuery())
+	dispatch(setLoading(true))
 
 	return getRepos(query)
 		.then(({ items }) => {
@@ -19,28 +23,25 @@ export const loadCurrentSearchQuery = (query) => (
 
 				return {
 					name: item.name,
-
 					description: item.description,
 					license: item.license ? item.license.name : '',
 					url: item.url,
-
-					// whether user put or not
 					language: item.language,
-					//contributors
 					stars: item.stargazers_count,
 					forks: item.forks_count,
 					issues: item.open_issues,
-					//aditional data
+
 					fullName: item.full_name
 				}
 			})
 
-			dispatch(setGithubRepos(state))
+			dispatch(setLoading(false))
 			dispatch(addMultipleRepos(ids, state))
 
 		})
 }
 
-export default createReducer('', () => ({
-	[SET_GITHUB_REPOS]: makeSetValueReducer()
+export const listLoading = createReducer(false, () => ({
+	[SET_SEARCH_IN_PROGRESS]: makeSetValueReducer()
 }))
+
