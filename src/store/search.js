@@ -1,4 +1,4 @@
-import { createReducer, makeResetValueReducer, makeSetValueReducer } from "../utils/reducers";
+import { createReducer, makeSetValueReducer } from "../utils/reducers";
 import { getRepos } from "../repos/repos";
 import { addMultipleRepos, resetReposBeforeNewQuery } from "./repos";
 import { makeSetValueActionCreator } from "../utils/actionCreators";
