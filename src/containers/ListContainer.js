@@ -2,13 +2,16 @@ import { connect } from 'react-redux'
 
 import List from '../components/List'
 import { withLoader } from "../components/withLoaderHoc";
+import { composeError } from "../components/composeErrorHoc";
 
-const mapStateToProps = ({ repoReducer: { uids }, listLoading }) => ({
+const mapStateToProps = ({ repoReducer: { uids }, searchReducer: { loading, noResults }, error }) => ({
 	uids,
-	loading: listLoading
+	loading,
+	noResults,
+	error: error && !loading
 })
 
 export default connect(
 	mapStateToProps,
 	{}
-)(withLoader(List))
+)(composeError(withLoader(List)))

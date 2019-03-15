@@ -15,8 +15,15 @@ const cardStyle = {
 
 const descriptionStyle = {
 	flexGrow: '1',
-	textAlign: 'start'
+	textAlign: 'start',
+	overflow: 'hidden',
+	whiteSpace: 'nowrap',
+	textOverflow: 'ellipsis',
 };
+
+const name = {
+	fontWeight: 600
+}
 
 
 const marginRight = {
@@ -37,12 +44,12 @@ export default class RepoItem extends PureComponent {
 	}
 
 	render() {
-		const {name, description, license, url, language, stars, forks, issues, starred, contributors } = this.props
+		const {fullName, description, license, url, language, stars, forks, issues, starred, contributors } = this.props
 
 		return (
 			<div style={cardStyle}>
 				<div style={row}>
-					<div style={marginRight}>{name}</div>
+					<div style={{...marginRight, ...name}}>{fullName}</div>
 					<div style={{...descriptionStyle, ...marginRight}}>{description}</div>
 					<Octicon icon={Star} /> {!starred && <span>!Starred</span>}
 
@@ -54,7 +61,7 @@ export default class RepoItem extends PureComponent {
 					<span style={marginRight}><Octicon icon={RepoForked}/>{forks}</span>
 					<span style={marginRight}><Octicon icon={Person}/>{contributors || '-'}</span>
 					<span style={marginRight}><Octicon icon={IssueOpened}/>{issues}</span>
-					<span style={marginRight}><a href={url} rel="noreferrer">link</a></span>
+					<span style={marginRight}><a href={url} rel="noopener noreferrer">Link to repo</a></span>
 				</div>
 			</div>
 		)

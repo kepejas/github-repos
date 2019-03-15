@@ -1,18 +1,10 @@
 import React, { Component } from 'react';
-import '../App.css';
-
-import SearchContainer from '../../containers/SearchContainer'
-import List from "../../containers/ListContainer";
+import Home from '../../components/Home'
 
 class App extends Component {
 	render() {
 		return (
-			<div className="App">
-				<header className="App-header">
-					<SearchContainer />
-				</header>
-				<List loadingLabel={'loading'} />
-			</div>
+			<Home />
 		);
 	}
 }
