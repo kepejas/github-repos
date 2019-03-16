@@ -38,3 +38,10 @@ export const unstarARepo = (path) => {
 		.delete(`${GITHUB_API}/user/starred/${path}`)
 		.then(response => response)
 }
+
+
+export const getCommitsActivity = (path) => {
+	return authenticatedAgent
+		.get(`${GITHUB_API}/repos/${path}/stats/commit_activity`)
+		.then(response => response.body)
+}

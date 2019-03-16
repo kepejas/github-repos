@@ -3,8 +3,6 @@ import { func } from 'prop-types'
 import { RepoCardItem } from './RepoCardItem'
 
 
-
-
 export default class RepoItem extends PureComponent {
 
 	componentDidMount() {

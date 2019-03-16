@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
 
-import styles from "./DetailsPageView.module.css";
-import { RepoCardItem } from "../components/RepoCardItem";
-import { DetailsHeaderView } from "./DetailsViewHeader";
+import styles from './DetailsPageView.module.css';
+import { DetailsHeaderView } from './DetailsViewHeader'
+import RepoItem from './../containers/RepoInDetailsContainer'
+import { ChartsComponent } from "./Chart";
 
 class DetailsPageView extends Component {
 	render() {
-		const { onStarClick, ...props } = this.props
+		const { onStarClick, data, ...props } = this.props
 		return (
 			<div className={styles.container}>
 				<DetailsHeaderView onStarClick={onStarClick} fullName={this.props.fullName} starred={this.props.starred} />
-				<RepoCardItem { ...props } />
+				<RepoItem { ...props } />
+				<ChartsComponent data={data} />
 			</div>
 		);
 	}

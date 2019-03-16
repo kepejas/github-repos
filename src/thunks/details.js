@@ -1,5 +1,6 @@
-import { getStarredData, starARepo, unstarARepo } from "../api/calls";
+import { getCommitsActivity, getContributors, getStarredData, starARepo, unstarARepo } from "../api/calls";
 import { loadStarredInfo } from "./repos";
+import { setContributorCount } from "../store/repos";
 
 
 export const toggleStarredStatus = (path, uid, starredRepoStatus) => (
@@ -20,5 +21,20 @@ export const toggleStarredStatus = (path, uid, starredRepoStatus) => (
 				// handle ui error here
 				return Promise.resolve()
 			})
+}
+
+
+export const loadLoadCommitCountPerWeek = (path, uid) => (
+	dispatch
+) => {
+	return getCommitsActivity(path)
+		.then((body) => {
+			console.log(body)
+
+			// if (body){
+			// 	console.log('body exi')
+			// 	// dispatch(setContributorCount(uid, body.length))
+			// }
+		})
 }
 

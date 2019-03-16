@@ -20,8 +20,7 @@ const mapStateToProps = ({ repoReducer: {  byUid } }, { match }) => {
 const mapDispatchToProps = (dispatch, { match }) => {
 	const { uid } = match.params
 	return {
-		onStarClick: (path, starredStatus) => { dispatch(toggleStarredStatus(path, uid, starredStatus))
-		}
+		onStarClick: (path, starredStatus) => { dispatch(toggleStarredStatus(path, uid, starredStatus)) }
 	}
 }
 

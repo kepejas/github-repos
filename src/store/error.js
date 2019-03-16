@@ -6,6 +6,6 @@ const ERROR_SET_LOADING_ERROR = 'ERROR_SET_LOADING_ERROR'
 export const setLoadingError = makeSetValueActionCreator(ERROR_SET_LOADING_ERROR)
 
 
-export const error = createReducer(false, () => ({
+export const error = createReducer(null, () => ({
 	[ERROR_SET_LOADING_ERROR]: makeSetValueReducer()
 }))
