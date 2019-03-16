@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import RepoItem from './../containers/RepoItemContainer'
+import RepoItem from '../containers/RepoItemInListContainer'
 
 export default class List extends Component {
 	render() {
