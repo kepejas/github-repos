@@ -11,6 +11,7 @@ const mapStateToProps = ({ repoReducer: {  byUid } }, { uid }) => {
 
 	return {
 		uid,
+		isInList: true,
 		...item
 	}
 }

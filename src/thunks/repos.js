@@ -1,4 +1,4 @@
-import { getContributors, getStarredData } from "../repos/repos";
+import { getContributors, getStarredData } from "../api/calls";
 import { setContributorCount, setStarredState } from "../store/repos";
 
 const loadContributorsCount = (path, uid) => (
@@ -12,7 +12,7 @@ const loadContributorsCount = (path, uid) => (
 		})
 }
 
-const loadStarredInfo = (path, uid) => (
+export const loadStarredInfo = (path, uid) => (
 	dispatch
 ) => {
 	return getStarredData(path)

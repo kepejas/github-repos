@@ -19,6 +19,7 @@ export const addMultipleRepos = makeAddItemsByUidActionCreator(REPOS_ADD_ITEMS)
 export const resetReposBeforeNewQuery = makeResetValueActionCreator(REPOS_RESET_ITEMS)
 
 export const setContributorCount = makeSetValueByUidActionCreator(REPO_SET_CONTRIBUTOR_COUNT)
+
 export const setStarredState = makeSetValueByUidActionCreator(REPOS_SET_STARRED_STATE)
 
 

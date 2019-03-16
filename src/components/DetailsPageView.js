@@ -6,11 +6,11 @@ import { DetailsHeaderView } from "./DetailsViewHeader";
 
 class DetailsPageView extends Component {
 	render() {
+		const { onStarClick, ...props } = this.props
 		return (
 			<div className={styles.container}>
-				{console.log(this.props)}
-				<DetailsHeaderView {...this.props} />
-				<RepoCardItem { ...this.props } />
+				<DetailsHeaderView onStarClick={onStarClick} fullName={this.props.fullName} starred={this.props.starred} />
+				<RepoCardItem { ...props } />
 			</div>
 		);
 	}

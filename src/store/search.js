@@ -1,5 +1,5 @@
 import { createReducer, makeSetValueReducer } from "../utils/reducers";
-import { getRepos } from "../repos/repos";
+import { getRepos } from "../api/calls";
 import { addMultipleRepos, resetReposBeforeNewQuery } from "./repos";
 import { makeSetValueActionCreator } from "../utils/actionCreators";
 import { combineReducers } from "redux";
