@@ -36,8 +36,6 @@ export const loadLoadCommitCountPerWeek = (path, uid) => (
 	return getCommitsActivity(path)
 		.then((data) => {
 
-			console.log(data)
-
 			if(data.length) {
 				const dataForState = _normalizeStateForChart(data, coef)
 				dispatch(setDataToState(dataForState))

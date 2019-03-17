@@ -10,8 +10,8 @@ export const DetailsPageView = ({ match: { params: { uid } } }) => (
 	<div className={styles.container}>
 		<div className={styles.header}>
 			<DetailsHeaderView uid={uid} />
+			<RepoItem uid={uid} />
 		</div>
-		<RepoItem uid={uid} />
 		<Charts uid={uid} />
 	</div>
 )

@@ -1,0 +1,15 @@
+.header {
+    justify-content: space-between;
+    align-items: center;
+    margin: 2rem 1rem 0;
+    display: flex;
+}
+
+.name {
+    color: #29487d;
+}
+
+.buttonWrapper {
+    height: 2rem;
+    width: 10rem;
+}

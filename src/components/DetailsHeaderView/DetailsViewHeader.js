@@ -6,9 +6,9 @@ export const DetailsHeaderView = ({ onStarClick, fullName, starred }) => {
 
 	return (
 		<div className={styles.header}>
-			<h1 className={styles.name}>{fullName}</h1>
-			<div>
-				<button type={"button"} onClick={() => onStarClick(fullName, starred)}>{buttonName}</button>
+			<h4 className={styles.name}>{fullName}</h4>
+			<div className={styles.buttonWrapper}>
+				<button className={styles.buttonWrapper} type={"button"} onClick={() => onStarClick(fullName, starred)}>{buttonName}</button>
 			</div>
 		</div>
 	)
