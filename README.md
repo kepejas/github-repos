@@ -35,3 +35,6 @@ npm run test
 Project is made with ``create-react-app`` and has some npm task within. 
 Running ``npm run eject`` will permanently remove all `create-react-app` configurations from this project.
 
+How to create a token:
+https://github.com/settings/tokens
+
