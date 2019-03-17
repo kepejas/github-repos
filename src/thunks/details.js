@@ -26,7 +26,7 @@ const getAndHandleCommitsActivity = (path, uid, coef) => (
 	return getCommitsActivity(path)
 		.then((response) => {
 			if(response.status !== 200) {
-				dispatch(getAndHandleCommitsActivity(path, uid))
+				dispatch(getAndHandleCommitsActivity(path, uid, coef))
 			} else {
 				const dataForState = _normalizeStateForChart(response.body, coef)
 				dispatch(setDataToState(dataForState))
@@ -40,14 +40,10 @@ export const loadLoadCommitCountPerWeek = (path, uid) => (
 	getState
 ) => {
 
-	dispatch(setDataToState([]))
-
 	const currentItemState = getState().repoReducer.byUid[uid]
 	const { issues, contributors } = currentItemState
 
 	const coef = _getCoef(contributors, issues)
-
-	console.log('coef', coef);
 
 	return dispatch(getAndHandleCommitsActivity(path, uid, coef))
 }
@@ -57,7 +53,6 @@ export const _normalizeStateForChart = (data, coef) => {
 
 		return data.map(({total, week}) => {
 			const weekNo = unixToJsDate(week)
-			console.log(typeof total)
 			return {
 				weekNo,
 				commits: Math.round(total * coef)

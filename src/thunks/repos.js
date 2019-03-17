@@ -1,5 +1,5 @@
 import { getContributors, getStarredData } from "../api/calls";
-import { setContributorCount, setStarredState } from "../store/repos";
+import { setContributorCount, setRepoItemLoading, setStarredState } from "../store/repos";
 
 export const loadContributorsCount = (path, uid) => (
 	dispatch
@@ -9,6 +9,9 @@ export const loadContributorsCount = (path, uid) => (
 			if(body) {
 				dispatch(setContributorCount(uid, body.length))
 			}
+		})
+		.then(() => {
+			dispatch(setRepoItemLoading(uid, false))
 		})
 }
 

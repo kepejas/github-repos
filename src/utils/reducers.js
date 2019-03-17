@@ -58,7 +58,7 @@ export const makeAddByUidReducer = () => ({ uids, items }, state) => {
 	let newState = { ...state }
 
 	uids.forEach((uid, i) => {
-	newState[uid] = items[i]
-})
+		newState[uid] = items[i]
+	})
 	return newState
 }

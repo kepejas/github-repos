@@ -22,12 +22,8 @@ export const loadCurrentSearchQuery = (query) => (
 	dispatch(setNoResultsFound(false))
 	dispatch(setDataToState([]))
 
-
 	return getRepos(query)
 		.then(({ items }) => {
-
-			dispatch(setLoading(false))
-
 			if(!items.length) {
 				dispatch(setNoResultsFound(true))
 			} else {
@@ -41,13 +37,16 @@ export const loadCurrentSearchQuery = (query) => (
 					forks: item.forks_count,
 					issues: item.open_issues,
 					contributors: null,
-					fullName: item.full_name
+					fullName: item.full_name,
+					loading: true
 				}))
 
 				dispatch(addMultipleRepos(ids, state))
+				dispatch(setLoading(false))
 			}
 		})
 		.catch(() => {
 			dispatch(setListLoadingError('One or more resources failed to load'))
 		})
+
 }
