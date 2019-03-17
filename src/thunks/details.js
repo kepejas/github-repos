@@ -1,7 +1,7 @@
-import { getCommitsActivity, starARepo, unstarARepo } from "../api/calls";
-import { loadStarredInfo } from "./repos";
-import { unixToJsDate } from "../utils/utils";
-import { setDataToState } from "../store/chart";
+import { getCommitsActivity, starARepo, unstarARepo } from '../api/calls'
+import { loadStarredInfo } from './repos'
+import { unixToJsDate } from '../utils/utils'
+import { setDataToState } from '../store/chart'
 
 export const toggleStarredStatus = (path, uid, starredRepoStatus) => (
 	dispatch
@@ -47,23 +47,30 @@ export const loadLoadCommitCountPerWeek = (path, uid) => (
 
 	const coef = _getCoef(contributors, issues)
 
+	console.log('coef', coef);
+
 	return dispatch(getAndHandleCommitsActivity(path, uid, coef))
 }
 
-export const _normalizeStateForChart = (data, coef) => (
-	data.map(({ total, week }) => {
-		const weekNo = unixToJsDate(week)
-		return {
-			weekNo,
-			commits: Math.round(total * coef)
-		}
-	}).sort((a, b) => (a.weekNo - b.weekNo))
-)
+export const _normalizeStateForChart = (data, coef) => {
+	if (data && data.length) {
+
+		return data.map(({total, week}) => {
+			const weekNo = unixToJsDate(week)
+			console.log(typeof total)
+			return {
+				weekNo,
+				commits: Math.round(total * coef)
+			}
+		}).sort((a, b) => (a.weekNo - b.weekNo))
+	}
+}
 
 export const _getCoef = (contributors, issues) => {
 	if(!issues) {
 		return 0
 	}
+	const contr = contributors || 0
 	return Math.round(contributors / issues * 1000) / 1000
 }
 

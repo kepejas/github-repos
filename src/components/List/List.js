@@ -4,6 +4,11 @@ import RepoItem from '../../containers/RepoItemInListContainer'
 import styles from './List.module.css'
 
 export default class List extends Component {
+
+	componentDidMount() {
+		this.props.onAttach()
+	}
+
 	render() {
 		const { uids, noResults } = this.props
 

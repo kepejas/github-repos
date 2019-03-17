@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Home from '../components/Home/Home'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { DetailsPageView } from "../components/DetailsPageView/DetailsPageView";
+import { DetailsPageView } from '../components/DetailsPageView/DetailsPageView'
 
 class App extends Component {
 	render() {

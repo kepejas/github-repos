@@ -1,7 +1,8 @@
-import { addMultipleRepos, resetReposBeforeNewQuery } from "../store/repos";
-import { getRepos } from "../api/calls";
-import { setListLoadingError } from "../store/error";
-import { setLoading, setNoResultsFound } from "../store/search";
+import { addMultipleRepos, resetReposBeforeNewQuery } from '../store/repos'
+import { getRepos } from '../api/calls'
+import { setListLoadingError } from '../store/error'
+import { setLoading, setNoResultsFound } from '../store/search'
+import { setDataToState } from "../store/chart";
 
 export const searchThunk = (query) => (
 	dispatch
@@ -19,7 +20,7 @@ export const loadCurrentSearchQuery = (query) => (
 	dispatch(resetReposBeforeNewQuery())
 	dispatch(setLoading(true))
 	dispatch(setNoResultsFound(false))
-	dispatch(setListLoadingError(null))
+	dispatch(setDataToState([]))
 
 
 	return getRepos(query)
