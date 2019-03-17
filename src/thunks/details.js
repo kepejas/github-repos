@@ -71,6 +71,6 @@ export const _getCoef = (contributors, issues) => {
 		return 0
 	}
 	const contr = contributors || 0
-	return Math.round(contributors / issues * 1000) / 1000
+	return Math.round(contr / issues * 1000) / 1000
 }
 
