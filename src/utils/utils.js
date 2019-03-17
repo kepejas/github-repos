@@ -1,4 +1,4 @@
-import * as moment from "moment";
+import * as moment from 'moment'
 
 export const GITHUB_API = 'https://api.github.com'
 

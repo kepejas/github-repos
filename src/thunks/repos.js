@@ -6,7 +6,7 @@ export const loadContributorsCount = (path, uid) => (
 ) => {
 	return getContributors(path)
 		.then((body) => {
-			if (body){
+			if(body) {
 				dispatch(setContributorCount(uid, body.length))
 			}
 		})

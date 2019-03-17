@@ -2,8 +2,6 @@ import { getCommitsActivity, starARepo, unstarARepo } from "../api/calls";
 import { loadStarredInfo } from "./repos";
 import { unixToJsDate } from "../utils/utils";
 import { setDataToState } from "../store/chart";
-import { setLoadingError } from "../store/error";
-
 
 export const toggleStarredStatus = (path, uid, starredRepoStatus) => (
 	dispatch
@@ -22,30 +20,34 @@ export const toggleStarredStatus = (path, uid, starredRepoStatus) => (
 			})
 }
 
+const getAndHandleCommitsActivity = (path, uid, coef) => (
+	dispatch
+) => {
+	return getCommitsActivity(path)
+		.then((response) => {
+			if(response.status !== 200) {
+				dispatch(getAndHandleCommitsActivity(path, uid))
+			} else {
+				const dataForState = _normalizeStateForChart(response.body, coef)
+				dispatch(setDataToState(dataForState))
+			}
+		})
+}
+
 
 export const loadLoadCommitCountPerWeek = (path, uid) => (
 	dispatch,
 	getState
 ) => {
 
+	dispatch(setDataToState([]))
+
 	const currentItemState = getState().repoReducer.byUid[uid]
 	const { issues, contributors } = currentItemState
 
 	const coef = _getCoef(contributors, issues)
 
-	return getCommitsActivity(path)
-		.then((data) => {
-
-			if(data.length) {
-				const dataForState = _normalizeStateForChart(data, coef)
-				dispatch(setDataToState(dataForState))
-			}
-			else {
-				// TODO: add a proper handler
-				dispatch(setLoadingError('No commits were made during the last year'))
-			}
-
-		})
+	return dispatch(getAndHandleCommitsActivity(path, uid, coef))
 }
 
 export const _normalizeStateForChart = (data, coef) => (

@@ -69,19 +69,22 @@ describe('details page', () => {
 		it('should calculate effective commits', async () => {
 
 			// mocks
-			const dataMock =  [{
-				"days": [
-					0,
-					3,
-					7,
-					4,
-					15,
-					1,
-					0
-				],
-				"total": 30,
-				"week": 1521936000
-			}]
+			const dataMock = {
+				status: 200,
+				body: [{
+					"days": [
+						0,
+						3,
+						7,
+						4,
+						15,
+						1,
+						0
+					],
+					"total": 30,
+					"week": 1521936000
+				}]
+			}
 
 			const contributors = 10
 			const issues = 1
@@ -105,9 +108,8 @@ describe('details page', () => {
 
 			const state = store.getState()
 
-			const commits = dataMock[0].total
+			const commits = dataMock.body[0].total
 			const effectiveCommits = contributors * commits / issues
-
 
 			expect(state.commitsData[0].commits).to.eq(effectiveCommits)
 

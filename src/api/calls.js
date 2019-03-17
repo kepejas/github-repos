@@ -16,7 +16,7 @@ export const getRepos = (query) => {
 
 export const getContributors = (path) => {
 	return authenticatedAgent
-		.get(`${GITHUB_API}/repos/${path}/contributors`)
+		.get(`${GITHUB_API}/repos/${path}/stats/contributors`)
 		.then(response => response.body)
 }
 
@@ -43,5 +43,5 @@ export const unstarARepo = (path) => {
 export const getCommitsActivity = (path) => {
 	return authenticatedAgent
 		.get(`${GITHUB_API}/repos/${path}/stats/commit_activity`)
-		.then(response => response.body)
+		.then(response => response)
 }

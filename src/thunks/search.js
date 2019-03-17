@@ -1,6 +1,6 @@
 import { addMultipleRepos, resetReposBeforeNewQuery } from "../store/repos";
 import { getRepos } from "../api/calls";
-import { setLoadingError } from "../store/error";
+import { setListLoadingError } from "../store/error";
 import { setLoading, setNoResultsFound } from "../store/search";
 
 export const searchThunk = (query) => (
@@ -19,12 +19,13 @@ export const loadCurrentSearchQuery = (query) => (
 	dispatch(resetReposBeforeNewQuery())
 	dispatch(setLoading(true))
 	dispatch(setNoResultsFound(false))
+	dispatch(setListLoadingError(null))
+
 
 	return getRepos(query)
 		.then(({ items }) => {
 
 			dispatch(setLoading(false))
-
 
 			if(!items.length) {
 				dispatch(setNoResultsFound(true))
@@ -38,7 +39,7 @@ export const loadCurrentSearchQuery = (query) => (
 					stars: item.stargazers_count,
 					forks: item.forks_count,
 					issues: item.open_issues,
-
+					contributors: null,
 					fullName: item.full_name
 				}))
 
@@ -46,6 +47,6 @@ export const loadCurrentSearchQuery = (query) => (
 			}
 		})
 		.catch(() => {
-			dispatch(setLoadingError('One or more resources failed to load'))
+			dispatch(setListLoadingError('One or more resources failed to load'))
 		})
 }

@@ -8,7 +8,7 @@ const mapStateToProps = ({ repoReducer: { uids }, searchReducer: { loading, noRe
 	uids,
 	loading,
 	noResults,
-	error: error && !loading
+	error: error.listError && !loading
 })
 
 export default connect(

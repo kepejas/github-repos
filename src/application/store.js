@@ -2,7 +2,7 @@ import { applyMiddleware, combineReducers, compose, createStore } from 'redux';
 import thunk from 'redux-thunk';
 import repoReducer from './../store/repos'
 import searchReducer from './../store/search'
-import { error } from './../store/error'
+import error from './../store/error'
 import { commitsData } from './../store/chart'
 
 

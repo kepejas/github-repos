@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import styles from './SearchBar.module.css'
-import { debounce } from "../../utils/utils";
+import { debounce } from '../../utils/utils'
 
 export default class SearchBar extends Component {
 	constructor (props) {
