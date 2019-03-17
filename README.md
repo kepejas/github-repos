@@ -15,25 +15,26 @@
 #### How to insert a token
 Find a file  ``
 src/config.js
-``   and define and insert your github token:
+``   and  insert your github token
 
 ``
 export const token = 'your token here'
 ``  
       
-Make your token has `repo` and `user` scopes in order to star or unstar a repo using this app. 
+Make sure your token has `repo` and `user` scopes in order to be able star or unstar a repo using this app. 
 
 
 #### Tests
 ``
 npm run test
-`` to run project tests
+`` to run project's unit tests
 
 
 ### More information
 
-Project is made with ``create-react-app`` and has some npm task within. 
+Project is made with ``create-react-app`` and has its own npm task included within `package.json`. 
 Running ``npm run eject`` will permanently remove all `create-react-app` configurations from this project.
+Once this done, it cannot be reverted.
 
 How to create a token:
 https://github.com/settings/tokens
