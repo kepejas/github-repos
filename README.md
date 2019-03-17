@@ -6,6 +6,13 @@
 
 ### To start
 
+- Clone your project
+- Run `npm install`
+- Add your github token
+- Run `npm run start`
+
+
+#### How to insert a token
 Find a file  ``
 src/config.js
 ``   and define and insert your github token:
@@ -13,15 +20,8 @@ src/config.js
 ``
 export const token = 'your token here'
 ``  
-    
-    
+      
 Make your token has `repo` and `user` scopes in order to star or unstar a repo using this app. 
-
-then run in your console
-``
-npm run start
-``
-to start a project.
 
 
 #### Tests
