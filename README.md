@@ -6,9 +6,9 @@
 
 ### To start
 
-- Clone your project
+- Clone this project
 - Run `npm install`
-- Add your github token
+- Add your github token to `config.js`
 - Run `npm run start`
 
 
