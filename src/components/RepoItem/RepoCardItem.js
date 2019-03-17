@@ -4,12 +4,10 @@ import Octicon, { IssueOpened, Person, RepoForked, Star } from '@githubprimer/oc
 import { Link } from "react-router-dom";
 
 
-export const RepoCardItem = ({ fullName, description, starred, license, language, stars, forks, contributors, issues, uid, isInList }) => {
-
-	const contributorsNotLoaded = contributors === null
+export const RepoCardItem = ({ fullName, description, starred, license, language, stars, forks, contributors, issues, uid, isInList, loading }) => {
 
 	const getStarredRepoColor = starred ? 'darkOrange' : 'black'
-	const conditionalLink = !contributorsNotLoaded ? <Link className={styles.link} to={`/repo/${uid}`}>Repo details</Link> : <span>Loading...</span>
+	const conditionalLink = !loading ? <Link className={styles.link} to={`/repo/${uid}`}>Repo details</Link> : <span>Loading...</span>
 
 	return (
 		<div className={styles.cardStyle}>
@@ -36,7 +34,7 @@ export const RepoCardItem = ({ fullName, description, starred, license, language
 				</span>
 				<span>
 					<Octicon verticalAlign="top" size={20} style={{marginRight: '4px'}} icon={Person}/>
-					<span className={styles.iconPadding}>{contributors}</span>
+					<span className={styles.iconPadding}>{loading ? 0 : contributors}</span>
 				</span>
 				<span>
 					<Octicon verticalAlign="top" size={20} icon={IssueOpened}/>
