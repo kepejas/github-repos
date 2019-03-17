@@ -1,0 +1,13 @@
+.search {
+    width: 30rem;
+    padding: 8px 0 8px 3rem;
+    height: 1.8rem;
+    cursor: text;
+    border: none;
+    font-size: 1.125rem;
+    min-height: 44px;
+    box-sizing: border-box;
+    line-height: 1.75rem;
+    border-radius: 4px;
+    background-color: #F1F3F4;
+}
