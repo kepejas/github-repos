@@ -2,6 +2,7 @@ import { getCommitsActivity, starARepo, unstarARepo } from "../api/calls";
 import { loadStarredInfo } from "./repos";
 import { unixToJsDate } from "../utils/utils";
 import { setDataToState } from "../store/chart";
+import { setLoadingError } from "../store/error";
 
 
 export const toggleStarredStatus = (path, uid, starredRepoStatus) => (
@@ -16,7 +17,7 @@ export const toggleStarredStatus = (path, uid, starredRepoStatus) => (
 				}
 			})
 			.catch(() => {
-				// handle ui error here
+				// show message
 				return Promise.resolve()
 			})
 }
@@ -30,25 +31,26 @@ export const loadLoadCommitCountPerWeek = (path, uid) => (
 	const currentItemState = getState().repoReducer.byUid[uid]
 	const { issues, contributors } = currentItemState
 
-	console.log({ issues, contributors })
-
 	const coef = _getCoef(contributors, issues)
 
 	return getCommitsActivity(path)
 		.then((data) => {
 
+			console.log(data)
+
 			if(data.length) {
 				const dataForState = _normalizeStateForChart(data, coef)
-				console.log(dataForState)
-
-
 				dispatch(setDataToState(dataForState))
+			}
+			else {
+				// TODO: add a proper handler
+				dispatch(setLoadingError('No commits were made during the last year'))
 			}
 
 		})
 }
 
-const _normalizeStateForChart = (data, coef) => (
+export const _normalizeStateForChart = (data, coef) => (
 	data.map(({ total, week }) => {
 		const weekNo = unixToJsDate(week)
 		return {
@@ -58,7 +60,7 @@ const _normalizeStateForChart = (data, coef) => (
 	}).sort((a, b) => (a.weekNo - b.weekNo))
 )
 
-const _getCoef = (contributors, issues) => {
+export const _getCoef = (contributors, issues) => {
 	if(!issues) {
 		return 0
 	}
