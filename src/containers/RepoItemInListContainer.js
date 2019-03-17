@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 
-import RepoItem from '../components/RepoItem'
+import RepoItem from '../components/RepoItem/RepoItem'
 import { loadUserInfo } from "../thunks/repos";
 
 const mapStateToProps = ({ repoReducer: {  byUid } }, { uid }) => {

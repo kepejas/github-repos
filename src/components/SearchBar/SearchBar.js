@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { debounce } from "../utils/utils";
+import styles from './SearchBar.module.css'
+import { debounce } from "../../utils/utils";
 
 export default class SearchBar extends Component {
 	constructor (props) {
@@ -17,6 +18,9 @@ export default class SearchBar extends Component {
 		return (
 			<div>
 				<input
+					type="input"
+					className={styles.search}
+					placeholder={'Search'}
 					onChange={e => {this.setSearchTerm(e.target.value)}}
 				/>
 			</div>

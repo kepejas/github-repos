@@ -4,3 +4,13 @@
     justify-content: flex-start;
     align-items: center;
 }
+
+.header {
+
+}
+
+.button {
+    padding: 0 2.1em;
+    font-size: .875em;
+    height: 48px;
+}

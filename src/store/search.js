@@ -21,17 +21,18 @@ export const loadCurrentSearchQuery = (query) => (
 
 	return getRepos(query)
 		.then(({ items }) => {
+
 			dispatch(setLoading(false))
+
+
 			if(!items.length) {
 				dispatch(setNoResultsFound(true))
 			} else {
 				const ids = items.map(({ id }) => id)
 
 				const state = items.map(item => ({
-					name: item.name,
 					description: item.description,
 					license: item.license ? item.license.name : '',
-					url: item.html_url,
 					language: item.language,
 					stars: item.stargazers_count,
 					forks: item.forks_count,
@@ -47,6 +48,7 @@ export const loadCurrentSearchQuery = (query) => (
 			dispatch(setLoadingError('One or more resources failed to load'))
 		})
 }
+
 
 const loading = createReducer(false, () => ({
 	[SEARCH_SET_LOADING]: makeSetValueReducer()

@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 
-import List from '../components/List'
+import List from '../components/List/List'
 import { withLoader } from "../components/withLoaderHoc";
 import { composeError } from "../components/composeErrorHoc";
 

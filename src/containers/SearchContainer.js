@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 
-import SearchBar from '../components/SearchBar'
+import SearchBar from '../components/SearchBar/SearchBar'
 import { searchThunk } from "../thunks/search";
 
 

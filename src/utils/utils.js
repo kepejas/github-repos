@@ -1,3 +1,5 @@
+import * as moment from "moment";
+
 export const GITHUB_API = 'https://api.github.com'
 
 export const debounce = (fn, time) => {
@@ -10,3 +12,8 @@ export const debounce = (fn, time) => {
 		timeout = setTimeout(functionCall, time);
 	}
 }
+
+
+export const unixToJsDate = (date) => (
+	moment.unix(date).format("W")
+)
