@@ -17,7 +17,7 @@ describe('repos', () => {
 
 		it('should load and set contributors in the repo', async () => {
 
-			const contributorsMock = [{ data: 1 }, { data: 2 }]
+			const contributorsMock = {status: 200, body: [{ data: 1 }, { data: 2 }]}
 
 			sandbox.stub(ApiRepo, 'getContributors').resolves(contributorsMock)
 			sandbox.stub(ApiRepo, 'getStarredData').resolves()
@@ -27,7 +27,7 @@ describe('repos', () => {
 					uids: [uid],
 					byUid: {
 						[uid]: {
-							contributors: '-'
+							contributors: null
 						}
 					}
 				}
@@ -36,8 +36,33 @@ describe('repos', () => {
 
 			const repoItemState = store.getState().repoReducer.byUid[uid]
 
-			expect(repoItemState.contributors).to.eq(contributorsMock.length)
+			expect(repoItemState.contributors).to.eq(contributorsMock.body.length)
 		})
+
+		it('should return no data if response is 204', async () => {
+
+			const contributorsMock = {status: 204, body: [{ data: 1 }, { data: 2 }]}
+
+			sandbox.stub(ApiRepo, 'getContributors').resolves(contributorsMock)
+			sandbox.stub(ApiRepo, 'getStarredData').resolves()
+
+			const store = applicationStore({
+				repoReducer: {
+					uids: [uid],
+					byUid: {
+						[uid]: {
+							contributors: null
+						}
+					}
+				}
+			})
+			await store.dispatch(loadUserInfo('testPath', uid))
+
+			const repoItemState = store.getState().repoReducer.byUid[uid]
+
+			expect(repoItemState.contributors).to.eq('No data')
+		})
+
 	})
 
 	describe('#loadStarredInfo', () => {
