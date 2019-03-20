@@ -21,7 +21,7 @@ src/config.js
 export const token = 'your token here'
 ``  
       
-Make sure your token has `repo` and `user` scopes in order to be able star or unstar a repo using this app. 
+Make sure your token has `repo` and `user` scopes in order to be able to use this app. 
 
 
 #### Tests
