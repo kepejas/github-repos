@@ -1,7 +1,8 @@
 import React from 'react'
 import styles from "./RepoItem.module.css";
-import Octicon, { IssueOpened, Person, RepoForked, Star } from '@githubprimer/octicons-react'
+import Octicon, { IssueOpened, RepoForked, Star } from '@githubprimer/octicons-react'
 import { Link } from "react-router-dom";
+import { ContributorsItem } from './../ContributorsItem/ContributorsItem'
 
 
 export const RepoCardItem = ({ fullName, description, starred, license, language, stars, forks, contributors, issues, uid, isInList, loading }) => {
@@ -32,10 +33,7 @@ export const RepoCardItem = ({ fullName, description, starred, license, language
 				<span>
 					<Octicon verticalAlign="top" size={20} style={{marginRight: '4px'}} icon={RepoForked}/><span className={styles.iconPadding}>{forks}</span>
 				</span>
-				<span>
-					<Octicon verticalAlign="top" size={20} style={{marginRight: '4px'}} icon={Person}/>
-					<span className={styles.iconPadding}>{loading ? 0 : contributors}</span>
-				</span>
+				<ContributorsItem contributors={contributors} loading={loading} />
 				<span>
 					<Octicon verticalAlign="top" size={20} icon={IssueOpened}/>
 					<span className={styles.iconPadding}>{issues}</span>
