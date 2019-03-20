@@ -4,10 +4,16 @@ import { setContributorCount, setRepoItemLoading, setStarredState } from "../sto
 export const loadContributorsCount = (path, uid) => (
 	dispatch
 ) => {
+	dispatch(setContributorCount(null))
 	return getContributors(path)
-		.then((body) => {
-			if (body.length) {
-				dispatch(setContributorCount(uid, body.length))
+		.then((response) => {
+			if (response.status !== 200) {
+				dispatch(loadContributorsCount(path, uid))
+			} else {
+				if (response.body){
+					dispatch(setContributorCount(uid, response.body.length))
+
+				}
 			}
 		})
 		.then(() => {
