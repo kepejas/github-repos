@@ -7,15 +7,17 @@ export const loadContributorsCount = (path, uid) => (
 	dispatch(setContributorCount(null))
 	return getContributors(path)
 		.then((response) => {
-			if (response.status !== 200) {
+			if (response.status === 202) {
 				dispatch(loadContributorsCount(path, uid))
-			} else {
-				if (response.body){
-					dispatch(setContributorCount(uid, response.body.length))
-
-				}
+			}
+			if (response.status === 204) {
+				dispatch(setContributorCount(uid, 'No data'))
+			}
+			if (response.status === 200 && response.body) {
+				dispatch(setContributorCount(uid, response.body.length))
 			}
 		})
+
 		.then(() => {
 			dispatch(setRepoItemLoading(uid, false))
 		})
@@ -38,8 +40,13 @@ export const loadStarredInfo = (path, uid) => (
 }
 
 export const loadUserInfo = (path, uid) => (
-	dispatch
+	dispatch,
+	getState
 ) => {
-	dispatch(loadContributorsCount(path, uid))
+	const { contributors } = getState().repoReducer.byUid[uid]
+
+	if(contributors === null){
+		dispatch(loadContributorsCount(path, uid))
+	}
 	dispatch(loadStarredInfo(path, uid))
 }
