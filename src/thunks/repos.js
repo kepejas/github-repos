@@ -6,9 +6,7 @@ export const loadContributorsCount = (path, uid) => (
 ) => {
 	return getContributors(path)
 		.then((body) => {
-			if(body) {
-				dispatch(setContributorCount(uid, body.length))
-			}
+			dispatch(setContributorCount(uid, body.length))
 		})
 		.then(() => {
 			dispatch(setRepoItemLoading(uid, false))
