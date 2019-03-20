@@ -17,7 +17,7 @@ export const getRepos = (query) => {
 export const getContributors = (path) => {
 	return authenticatedAgent
 		.get(`${GITHUB_API}/repos/${path}/stats/contributors`)
-		.then(response => response.body)
+		.then(response => response)
 }
 
 export const getStarredData = (path) => {
