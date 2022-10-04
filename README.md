@@ -36,6 +36,8 @@ Project is made with ``create-react-app`` and has its own npm task included with
 Running ``npm run eject`` will permanently remove all `create-react-app` configurations from this project.
 Once this done, it cannot be reverted.
 
+Project is made specifically to use redux/thunks for almost every user action.
+
 How to create a token:
 https://github.com/settings/tokens
 
